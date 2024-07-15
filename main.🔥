@@ -1,13 +1,9 @@
-from collections import List
+from collections import Dict
 
 fn main():
-    var lists: List[Int] = List(2,3,4,5) 
-    lists.append(7)
-    lists.append(9)
-    print("poping out ", lists.pop())
-    for idx in range(len(lists)):
-        print(lists[idx])
-    var l2 = List(1,2,3,4,5)
-    for x in l2:
-        print(x[])
-
+    var d = Dict[String, Int]()
+    d["one"] = 1
+    d["two"] = 2
+    d["three"] = 3
+    for x in d.items():
+        print(x[].key, x[].value)
