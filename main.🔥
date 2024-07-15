@@ -1,33 +1,13 @@
-from sys.param_env import is_defined
-from tensor import TensorShape, TensorSpec, Tensor
-from random import rand
-from math import sqrt
-from algorithm import vectorize
-from sys.info import simdwidthof
-
-alias type = DType.float32 if is_defined["FLOAT32"]() else DType.float64
-let t = rand[type](3,3)
-alias simd_width: Int = simdwidthof[type]()
-
-fn tensor_math(t: Tensor[type]) -> Tensor[type]:
-    var new_t = Tensor[type](t.shape()) 
-    for i in range(t.num_elements()):
-        new_t[i] = sqrt(t[i])
-    return new_t
-
-fn tensor_math_vectorized(t: Tensor[type]) -> Tensor[type]:
-    var new_t = Tensor[type](t.shape()) 
-    @parameter
-    fn vecmath[simd_width: Int](idx: Int) -> None:
-        new_t.simd_store[simd_width](idx, sqrt(t.simd_load[simd_width](idx))) 
-    vectorize[simd_width, vecmath](t.num_elements())
-    return new_t
-
-
+from collections import List
 
 fn main():
-    let t = rand[type](3,3)
-    print(tensor_math(t))
-    print("-----------------------")
-    print(tensor_math_vectorized(t))
+    var lists: List[Int] = List(2,3,4,5) 
+    lists.append(7)
+    lists.append(9)
+    print("poping out ", lists.pop())
+    for idx in range(len(lists)):
+        print(lists[idx])
+    var l2 = List(1,2,3,4,5)
+    for x in l2:
+        print(x[])
 
