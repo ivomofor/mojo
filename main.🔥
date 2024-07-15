@@ -1,9 +1,6 @@
-from collections import Dict
-
 fn main():
-    var d = Dict[String, Int]()
-    d["one"] = 1
-    d["two"] = 2
-    d["three"] = 3
-    for x in d.items():
-        print(x[].key, x[].value)
+    var opt: Optional[String] = str("Testing")
+
+    print(opt.or_else("nothing"))
+    var custom_greeting: Optional[String] = None
+    print(custom_greeting.or_else("Hello"))
