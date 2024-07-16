@@ -1,6 +1,42 @@
-fn main():
-    var opt: Optional[String] = str("Testing")
+struct MyPair:
+    var first: Int
+    var second: Int
 
-    print(opt.or_else("nothing"))
-    var custom_greeting: Optional[String] = None
-    print(custom_greeting.or_else("Hello"))
+    fn __init__(inout self, first: Int, second: Int):
+        self.first = first
+        self.second = second
+
+    fn get_sume(self) -> Int:
+        return self.first + self.second
+
+struct Logger:
+    fn __int(self): pass
+    @staticmethod
+    fn log_info(message: String):
+        print(message)
+
+struct MyPet:
+    var name: String
+    var age: Int
+    fn __init__(inout self, owned name: String, age: Int):
+        self.name = name^
+        self.age = age 
+
+    fn __copyinit__(inout self, existing: Self):
+        self.name = existing.name
+        self.age = existing.age
+    fn __moveinit__(inout self, owned existing: Self):
+        self.name = existing.name^
+        self.age = existing.age
+
+fn main():
+    var p: MyPair = MyPair(1,2)
+    print(p.first, p.second)
+    print(p.get_sume())
+    Logger.log_info("static message")
+    var dog = MyPet("Charlie", 5)
+    var poodle = dog 
+    print(poodle.name)
+    var move = poodle^
+    print(move.age)
+   
