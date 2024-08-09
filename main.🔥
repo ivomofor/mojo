@@ -1,10 +1,15 @@
-from tensor import Tensor, TensorShape
-
-def print_shap(t: Tensor[DType.float32]):
-    shape = t.shape()
-    print(shape)
+from max.graph import TensorType, Type, Graph
 
 fn main() raises:
-    var tensor = Tensor[DType.float32](256, 256)
-    print_shap(tensor)
-   
+
+    # initialize the graph
+    var graph = Graph(in_types = List[Type](TensorType(DType.float32, 1), TensorType(DType.float32, 2))) 
+
+    # create a symbolic representation of addition 
+    var out = graph[0] + graph[1]
+
+    # designate out as the output of the graph 
+    graph.output(out)
+
+    # print out the graph's output 
+    print(graph)
