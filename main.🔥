@@ -8,7 +8,23 @@ struct MyPair:
     fn dump(self):
         print(self.first)
         print(self.second)
+trait SomeTrait:
+    fn required_method(self, x: Int): ...
+
+@value
+struct SomeStruct(SomeTrait):
+    fn required_method(self, x: Int):
+        print('---> ', x)
+
+fn func_with_trait[T: SomeTrait](x: T):
+    x.required_method(3)
+
+fn use_trait_func():
+    var thing = SomeStruct()
+    func_with_trait(thing)
+
 
 fn main():
     var x = MyPair(1,2)
     x.dump()
+    use_trait_func()
