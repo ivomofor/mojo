@@ -1,21 +1,2 @@
-from tensor import Tensor, TensorShape
-from max.graph import Graph, TensorType
-from max.graph.quantization import Q4_0Encoding
-from max.graph.ops.quantized_ops import qmatmul
-from max.engine import InferenceSession
-
-fn main() raises:
-    var graph = Graph(TensorType(DType.float32, 32, 64))
-    var constant_value = Tensor[DType.float32](TensorShape(32, 64), 0.15)
-    var quantized_value = Q4_0Encoding.quantize(constant_value)
-    var quantized_constant = graph.constant(quantized_value)
-    var matmul = qmatmul[Q4_0Encoding](graph[0], quantized_constant)
-    graph.output(matmul)
-
-    var session = InferenceSession()
-    var model = session.load(graph)
-
-    var input = Tensor[DType.float32](TensorShape(32, 64), 0.5)
-    var result = model.execute('input0', input^)
-    var output = result.get[DType.float32]('output0')
-    print(output)
+fn main():
+    print("Hello, world!")
