@@ -1,3 +1,5 @@
+from max.driver import Tensor, cup_device 
+
 struct MyPair:
     var first: Int 
     var second: Int
@@ -17,6 +19,7 @@ struct SomeStruct(SomeTrait):
         print('---> ', x)
 
 fn func_with_trait[T: SomeTrait](x: T):
+
     x.required_method(3)
 
 fn use_trait_func():
